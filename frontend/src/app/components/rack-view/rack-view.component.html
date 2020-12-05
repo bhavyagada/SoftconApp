@@ -1,0 +1,31 @@
+<div>
+    <h1 class="display-2 text-center">All Racks</h1>
+    <a href="/addrack" class="btn btn-primary btn-rounded-corners btn-lg">Add New Rack</a>
+    <div class="header">
+        <input type="text" placeholder="Search Rack Code" [(ngModel)]="code" (input)="search()">
+    </div><br>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Rack Code</th>
+                <th scope="col">Rack Description</th>
+                <th scope="col">Rack Capacity</th>
+                <th scope="col">Default</th>
+                <th scope="col">InActive</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let rack of racks">
+            <tr>
+                <td><a href="/editrack">Edit</a></td>
+                <td><a [routerLink]="['/racks', rack._id]" (click)="deleteRack(rack)">Delete</a></td>
+                <td>{{ rack.code }}</td>
+                <td>{{ rack.desc }}</td>
+                <td>{{ rack.capacity }}</td>
+                <td>{{ rack.isdefault }}</td>
+                <td>{{ rack.inactive }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+<h1 class="display-2 text-center">Edit Rack</h1>
+<form>
+    <div class="form-group">
+        <h4><label for="code">Code</label></h4>
+        <input #rcode type="text" class="form-control" id="code" pattern="^(0|[1-9][0-9]*)$">
+    </div>
+    <div class="form-group">
+        <h4><label for="desc">Description</label></h4>
+        <input #rdesc type="text" class="form-control" id="desc" required>
+    </div>
+    <div class="form-group">
+        <h4><label for="capacity">Capacity</label></h4>
+        <input #rcapacity type="text" class="form-control" id="capacity" min="1" max="99" pattern="^(0|[1-9][0-9]*)$" title="Maximum capacity should not exceed 99 and cannot contain decimal numbers" required>
+    </div>
+    <div class="form-check form-check-inline">
+        <input #rdefault type="checkbox" class="form-check-input" id="isdefault">
+        <h4><label class="form-check-label" for="isdefault">Default</label></h4>
+    </div>
+    <div class="form-check form-check-inline">
+        <input #rinactive type="checkbox" class="form-check-input" id="inactive">
+        <h4><label class="form-check-label" for="inactive">InActive</label></h4>
+    </div><br>
+    <button type="submit" class="btn btn-primary btn-lg" (click)="editRack(rcode.value, rdesc.value, rcapacity.value, rdefault.value, rinactive.value)">Edit</button>
+    <a href="/" class="btn btn-primary btn-lg">Cancel</a>
+    <a href="/" class="btn btn-primary btn-lg">Rack Summary Page</a>
+</form>
