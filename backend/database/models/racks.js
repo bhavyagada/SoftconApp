@@ -16,12 +16,12 @@ const RackSchema = new mongoose.Schema({
         max: 99,
         required: true
     },
-    default: {
-        type: Boolean,
+    isdefault: {
+        type: String,
         default: false
     },
     inactive: {
-        type: Boolean,
+        type: String,
         default: false
     }
 })

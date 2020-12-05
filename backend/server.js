@@ -1,14 +1,16 @@
 const express = require('express')
-const app = express()
+const cors = require('cors')
 const mongoose = require('./database/mongoose')
 const Rack = require('./database/models/racks')
+
+const app = express()
 const port = 3000
 app.use(express.json())
 
 // Cross Origin Resource Sharing
+app.use(cors())
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     next()
 })
@@ -22,7 +24,7 @@ app.get('/racks', (req, res) => {
 
 // Create a Rack
 app.post('/racks', (req, res) => {
-    (new Rack({'code': req.body.code, 'desc': req.body.desc, 'capacity': req.body.capacity, 'default': req.body.default, 'inactive': req.body.inactive}))
+    (new Rack({'code': req.body.code, 'desc': req.body.desc, 'capacity': req.body.capacity, 'default': req.body.isdefault, 'inactive': req.body.inactive}))
         .save()
         .then((racks) => res.send(racks))
         .catch((error) => console.log(error))
@@ -36,8 +38,8 @@ app.get('/racks/:rackId', (req, res) => {
 })
 
 // Update a Rack by Id
-app.patch('/racks/:rackId', (req, res) => {
-    Rack.findOneAndUpdate({ '_id': req.params.rackId }, { $set: req.body })
+app.put('/racks/:rackId', (req, res) => {
+    Rack.findByIdAndUpdate({ '_id': req.params.rackId }, { $set: req.body })
         .then((racks) => res.send(racks))
         .catch((error) => console.log(error))
 })
